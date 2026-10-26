@@ -103,6 +103,49 @@ ul.pt li:before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px
 .ask{background:var(--surface);border-radius:12px;padding:12px 16px;
   font-size:17px;color:var(--ink);margin:0}
 
+/* la mappa cartelle: l'albero vero, con il suggerimento che si apre al
+   passaggio del mouse. Il testo del suggerimento e un figlio con data-en,
+   cosi lo scambio di lingua lo prende senza una riga di JS in piu. */
+.tree{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:14px 16px;margin:0 0 10px}
+.tree-h{display:block;font-size:13px;color:var(--mute);margin-bottom:10px}
+.tree-h b{color:var(--acc);font-weight:600}
+.tnode{position:relative;display:flex;align-items:baseline;gap:8px;
+  padding:3px 6px;border-radius:7px;cursor:help;outline:0}
+.tnode:hover,.tnode:focus-visible{background:var(--acc-bg)}
+.tnode .b{color:var(--mute);font:400 13px/1.6 ui-monospace,SFMono-Regular,Menlo,
+  Consolas,monospace;white-space:pre;flex:none}
+.tnode .nm{font:600 13.5px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--ink);border-bottom:1px dotted var(--mute)}
+.tnode[data-k="root"] .nm{color:var(--acc);border-bottom-color:var(--acc2)}
+.tnode[data-k="cross"] .nm{color:var(--alt)}
+.tnode[data-k="sale"] .nm{color:var(--ok)}
+.tnode[data-k="opt"] .nm,.tnode[data-k="sys"] .nm{color:var(--mute);font-weight:400}
+.tnode .tip{position:absolute;left:0;top:calc(100% + 4px);z-index:20;
+  width:min(520px,88%);background:var(--ink);color:#fff;border-radius:10px;
+  padding:10px 13px;font:400 14px/1.45 var(--fs);
+  box-shadow:0 8px 24px rgba(0,0,0,.22);
+  opacity:0;visibility:hidden;transform:translateY(-3px);
+  transition:opacity .12s,transform .12s,visibility .12s}
+.tnode:hover .tip,.tnode:focus-visible .tip{opacity:1;visibility:visible;
+  transform:translateY(0)}
+.tree-lg{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:11px;
+  padding-top:10px;border-top:1px solid var(--line);font-size:12.5px;
+  color:var(--mute)}
+.tree-lg span{display:inline-flex;align-items:center;gap:6px}
+.tree-lg i{width:9px;height:9px;border-radius:3px;background:var(--mute);
+  flex:none}
+.tree-lg [data-k="root"] i{background:var(--acc)}
+.tree-lg [data-k="cross"] i{background:var(--alt)}
+.tree-lg [data-k="ph"] i{background:var(--ink)}
+.tree-lg [data-k="sale"] i{background:var(--ok)}
+@media (max-width:640px){
+  .tnode{flex-wrap:wrap}
+  .tnode .tip{width:100%;position:static;opacity:1;visibility:visible;
+    transform:none;margin-top:6px;font-size:13.5px;display:none}
+  .tnode:focus-visible .tip{display:block}
+}
+
 /* la struttura fissa: la parte che abbiamo deciso noi e che tutto il resto
    legge. I nomi di cartella sono letterali, quindi monospace e non tradotti. */
 .st-i{font-size:16px;color:var(--ink2);margin:0 0 12px}
